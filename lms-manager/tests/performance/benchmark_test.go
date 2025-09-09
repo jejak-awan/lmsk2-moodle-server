@@ -432,7 +432,10 @@ func setupBenchmarkDB(b *testing.B) *sql.DB {
 		}
 	}
 
-	passwordHash, _ := utils.HashPassword("admin123")
+	passwordHash, err := utils.HashPassword("admin123")
+	if err != nil {
+		b.Fatalf("Failed to hash password: %v", err)
+	}
 	_, err = db.Exec(`
 		INSERT INTO users (id, username, email, password_hash, role, active)
 		VALUES (?, ?, ?, ?, ?, ?)
