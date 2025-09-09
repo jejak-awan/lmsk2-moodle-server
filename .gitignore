@@ -90,3 +90,41 @@ Thumbs.db
 # Temporary files
 tmp/
 temp/
+
+# Documentation (Protected - K2NET Internal)
+docs/
+*.md
+README.md
+
+# Configuration files (Protected)
+config.php
+*.conf
+*.ini
+
+# Backup files (Protected)
+backup/
+*.sql
+*.gz
+*.tar
+
+# Log files (Protected)
+*.log
+logs/
+var/log/
+
+# Security files (Protected)
+.htaccess
+.htpasswd
+*.key
+*.pem
+*.crt
+
+# Database files (Protected)
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache files (Protected)
+cache/
+tmp/
+temp/
