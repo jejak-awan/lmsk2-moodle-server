@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.title}}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="/static/images/logo.svg" alt="LMS Manager" />
+                    <h1>LMS Manager</h1>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Overview</div>
+                    <button class="nav-item active" onclick="showDashboard()">
+                        <span class="nav-item-icon" data-icon="dashboard">📈</span>
+                        Dashboard
+                    </button>
+                    <button class="nav-item" onclick="showSystem()">
+                        <span class="nav-item-icon" data-icon="monitor">💻</span>
+                        System Status
+                    </button>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Moodle</div>
+                    <button class="nav-item" onclick="showMoodle()">
+                        <span class="nav-item-icon" data-icon="bookOpen">🎓</span>
+                        Moodle Management
+                    </button>
+                    <button class="nav-item" onclick="showBackups()">
+                        <span class="nav-item-icon" data-icon="hardDrive">🗂️</span>
+                        Backups
+                    </button>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Monitoring</div>
+                    <button class="nav-item" onclick="showLogs()">
+                        <span class="nav-item-icon" data-icon="fileText">📝</span>
+                        System Logs
+                    </button>
+                    <button class="nav-item" onclick="showAlerts()">
+                        <span class="nav-item-icon" data-icon="alertTriangle">🔔</span>
+                        Alerts
+                    </button>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Settings</div>
+                    <button class="nav-item" onclick="showUsers()">
+                        <span class="nav-item-icon" data-icon="users">👤</span>
+                        Users
+                    </button>
+                    <button class="nav-item" onclick="showSettings()">
+                        <span class="nav-item-icon" data-icon="settings">🔧</span>
+                        Settings
+                    </button>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Navbar -->
+            <nav class="navbar">
+                <div class="navbar-left">
+                    <h2 class="navbar-title">Dashboard</h2>
+                </div>
+                <div class="navbar-right">
+                    <div class="navbar-actions">
+                        <button class="theme-toggle" onclick="toggleTheme()" id="theme-toggle">
+                            <span id="theme-icon">🌙</span>
+                        </button>
+                        <div class="user-info">
+                            <span id="username">Admin</span>
+                            <button onclick="logout()" class="btn btn-ghost btn-sm">
+                                <span class="nav-item-icon" data-icon="logout">↪️</span>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <div class="container">
+                    <!-- System Stats Grid -->
+                    <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>CPU Usage</h3>
+                        <span class="stat-icon" data-icon="cpu">⚡</span>
+                    </div>
+                    <div class="stat-value" id="cpu-usage">{{.system_stats.CPUUsage}}%</div>
+                    <div class="stat-bar">
+                        <div class="stat-fill" id="cpu-bar" style="width: {{.system_stats.CPUUsage}}%"></div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Memory Usage</h3>
+                        <span class="stat-icon" data-icon="memoryStick">📊</span>
+                    </div>
+                    <div class="stat-value" id="memory-usage">{{.system_stats.MemoryUsage}}%</div>
+                    <div class="stat-bar">
+                        <div class="stat-fill" id="memory-bar" style="width: {{.system_stats.MemoryUsage}}%"></div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Disk Usage</h3>
+                        <span class="stat-icon" data-icon="hardDrive">🗄️</span>
+                    </div>
+                    <div class="stat-value" id="disk-usage">{{.system_stats.DiskUsage}}%</div>
+                    <div class="stat-bar">
+                        <div class="stat-fill" id="disk-bar" style="width: {{.system_stats.DiskUsage}}%"></div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>System Uptime</h3>
+                        <span class="stat-icon" data-icon="clock">🕐</span>
+                    </div>
+                    <div class="stat-value" id="uptime">{{.system_stats.Uptime}}s</div>
+                </div>
+            </div>
+
+            <!-- Moodle Status -->
+            <div class="moodle-section">
+                <div class="section-header">
+                    <h2>Moodle Status</h2>
+                    <div class="status-indicator" id="moodle-status-indicator">
+                        <span class="status-dot" id="moodle-status-dot"></span>
+                        <span id="moodle-status-text">{{.moodle_status.Running}}</span>
+                    </div>
+                </div>
+
+                <div class="moodle-info">
+                    <div class="info-item">
+                        <span class="info-label">Version:</span>
+                        <span class="info-value" id="moodle-version">{{.moodle_status.Version}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Uptime:</span>
+                        <span class="info-value" id="moodle-uptime">{{.moodle_status.Uptime}}s</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Process ID:</span>
+                        <span class="info-value" id="moodle-pid">{{.moodle_status.ProcessID}}</span>
+                    </div>
+                </div>
+
+                <div class="moodle-actions">
+                    <button onclick="startMoodle()" class="btn btn-success">
+                        <span class="nav-item-icon" data-icon="play">▶</span>
+                        Start Moodle
+                    </button>
+                    <button onclick="stopMoodle()" class="btn btn-destructive">
+                        <span class="nav-item-icon" data-icon="square">⏹</span>
+                        Stop Moodle
+                    </button>
+                    <button onclick="restartMoodle()" class="btn btn-outline">
+                        <span class="nav-item-icon" data-icon="rotateCcw">↻</span>
+                        Restart Moodle
+                    </button>
+                </div>
+            </div>
+
+            <!-- Alerts Section -->
+            <div class="alerts-section">
+                <div class="section-header">
+                    <h2>System Alerts</h2>
+                    <button onclick="refreshAlerts()" class="btn btn-secondary">
+                        <span class="nav-item-icon" data-icon="refreshCw">🔄</span>
+                        Refresh
+                    </button>
+                </div>
+                <div class="alerts-list" id="alerts-list">
+                    <!-- Alerts will be loaded here -->
+                </div>
+            </div>
+
+            <!-- System Logs Section -->
+            <div class="logs-section">
+                <div class="section-header">
+                    <h2>System Logs</h2>
+                    <button onclick="refreshLogs()" class="btn btn-secondary">
+                        <span class="nav-item-icon" data-icon="refreshCw">🔄</span>
+                        Refresh
+                    </button>
+                </div>
+                <div class="logs-list" id="logs-list">
+                    <!-- Logs will be loaded here -->
+                </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="/static/js/icons.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
