@@ -566,7 +566,10 @@ func setupTestDB(t *testing.T) *sql.DB {
 	}
 
 	// Create default admin user
-	passwordHash, _ := utils.HashPassword("admin123")
+	passwordHash, err := utils.HashPassword("admin123")
+	if err != nil {
+		t.Fatalf("Failed to hash admin password: %v", err)
+	}
 	_, err = db.Exec(`
 		INSERT INTO users (id, username, email, password_hash, role, active)
 		VALUES (?, ?, ?, ?, ?, ?)
