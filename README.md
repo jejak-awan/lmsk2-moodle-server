@@ -54,26 +54,205 @@ Server untuk Learning Management System (LMS) berbasis Moodle yang dirancang unt
 
 ## ⚙️ Requirements & Dependencies
 
-### 🔧 Core Requirements
+### 🔧 Core Requirements by Moodle Version
 
-#### Web Server
-- **Nginx** `1.18+` - High-performance web server
-- **PHP-FPM** `8.1+` - FastCGI Process Manager
+#### 🌟 Moodle 3.11 LTS (Current Stable)
+**Web Server:**
+- **Apache** `2.4+` atau **Nginx** `1.18+`
+- **PHP** `7.4.0` - `8.1.x` (PHP 8.2+ tidak didukung)
 - **SSL/TLS** - Let's Encrypt atau sertifikat komersial
 
-#### Database
-- **MariaDB** `10.6+` - Primary database (recommended)
-- **MySQL** `8.0+` - Alternative database
-- **PostgreSQL** `13+` - Alternative database
+**Database:**
+- **MySQL** `5.7.33+` atau **MariaDB** `10.3+`
+- **PostgreSQL** `10+`
+- **Microsoft SQL Server** `2017+`
 
-#### PHP Extensions
+**PHP Extensions (Moodle 3.11):**
 ```bash
-# Core PHP Extensions
+# Required Extensions
+php7.4-fpm php7.4-cli php7.4-common
+php7.4-mysql php7.4-zip php7.4-gd
+php7.4-mbstring php7.4-curl php7.4-xml
+php7.4-bcmath php7.4-intl php7.4-soap
+php7.4-ldap php7.4-imagick php7.4-xmlrpc
+php7.4-openssl php7.4-json php7.4-dom
+php7.4-fileinfo php7.4-iconv php7.4-simplexml
+php7.4-tokenizer php7.4-xmlreader php7.4-xmlwriter
+```
+
+#### 🚀 Moodle 4.0+ (Next Generation)
+**Web Server:**
+- **Apache** `2.4+` atau **Nginx** `1.18+`
+- **PHP** `8.0.0` - `8.2.x` (PHP 7.4 tidak didukung)
+- **SSL/TLS** - Let's Encrypt atau sertifikat komersial
+
+**Database:**
+- **MySQL** `8.0+` atau **MariaDB** `10.6+`
+- **PostgreSQL** `12+`
+- **Microsoft SQL Server** `2017+`
+
+**PHP Extensions (Moodle 4.0+):**
+```bash
+# Required Extensions
 php8.1-fpm php8.1-cli php8.1-common
 php8.1-mysql php8.1-zip php8.1-gd
 php8.1-mbstring php8.1-curl php8.1-xml
 php8.1-bcmath php8.1-intl php8.1-soap
 php8.1-ldap php8.1-imagick php8.1-redis
+php8.1-openssl php8.1-json php8.1-dom
+php8.1-fileinfo php8.1-iconv php8.1-simplexml
+php8.1-tokenizer php8.1-xmlreader php8.1-xmlwriter
+php8.1-exif php8.1-ftp php8.1-gettext
+```
+
+#### 🔮 Moodle 5.0+ (Future)
+**Web Server:**
+- **Apache** `2.4+` atau **Nginx** `1.20+`
+- **PHP** `8.1.0` - `8.3.x` (PHP 8.0 tidak didukung)
+- **SSL/TLS** - Let's Encrypt atau sertifikat komersial
+
+**Database:**
+- **MySQL** `8.0+` atau **MariaDB** `10.8+`
+- **PostgreSQL** `13+`
+- **Microsoft SQL Server** `2019+`
+
+**PHP Extensions (Moodle 5.0+):**
+```bash
+# Required Extensions
+php8.2-fpm php8.2-cli php8.2-common
+php8.2-mysql php8.2-zip php8.2-gd
+php8.2-mbstring php8.2-curl php8.2-xml
+php8.2-bcmath php8.2-intl php8.2-soap
+php8.2-ldap php8.2-imagick php8.2-redis
+php8.2-openssl php8.2-json php8.2-dom
+php8.2-fileinfo php8.2-iconv php8.2-simplexml
+php8.2-tokenizer php8.2-xmlreader php8.2-xmlwriter
+php8.2-exif php8.2-ftp php8.2-gettext
+php8.2-sodium php8.2-hash php8.2-filter
+```
+
+### 📊 Version Compatibility Matrix
+
+| Moodle Version | PHP Version | MySQL | MariaDB | PostgreSQL | Apache | Nginx |
+|----------------|-------------|-------|---------|------------|--------|-------|
+| **3.11 LTS** | 7.4 - 8.1 | 5.7.33+ | 10.3+ | 10+ | 2.4+ | 1.18+ |
+| **4.0** | 8.0 - 8.2 | 8.0+ | 10.6+ | 12+ | 2.4+ | 1.18+ |
+| **4.1** | 8.0 - 8.2 | 8.0+ | 10.6+ | 12+ | 2.4+ | 1.18+ |
+| **4.2** | 8.1 - 8.3 | 8.0+ | 10.6+ | 12+ | 2.4+ | 1.20+ |
+| **5.0** | 8.1 - 8.3 | 8.0+ | 10.8+ | 13+ | 2.4+ | 1.20+ |
+
+### 💻 Hardware Requirements by Version
+
+#### 🌟 Moodle 3.11 LTS
+**Minimum:**
+- **CPU**: 1 GHz single core
+- **RAM**: 512 MB
+- **Storage**: 200 MB (kode) + 1 GB (konten)
+- **Network**: 1 Mbps
+
+**Recommended:**
+- **CPU**: 2 GHz dual-core
+- **RAM**: 2 GB
+- **Storage**: 5 GB SSD
+- **Network**: 10 Mbps
+
+**Production (100+ users):**
+- **CPU**: 4 cores @ 2.5 GHz
+- **RAM**: 8 GB
+- **Storage**: 50 GB SSD
+- **Network**: 100 Mbps
+
+#### 🚀 Moodle 4.0+
+**Minimum:**
+- **CPU**: 1.5 GHz single core
+- **RAM**: 1 GB
+- **Storage**: 500 MB (kode) + 2 GB (konten)
+- **Network**: 2 Mbps
+
+**Recommended:**
+- **CPU**: 2.5 GHz dual-core
+- **RAM**: 4 GB
+- **Storage**: 10 GB SSD
+- **Network**: 20 Mbps
+
+**Production (100+ users):**
+- **CPU**: 8 cores @ 3.0 GHz
+- **RAM**: 16 GB
+- **Storage**: 100 GB SSD
+- **Network**: 200 Mbps
+
+#### 🔮 Moodle 5.0+
+**Minimum:**
+- **CPU**: 2 GHz single core
+- **RAM**: 2 GB
+- **Storage**: 1 GB (kode) + 5 GB (konten)
+- **Network**: 5 Mbps
+
+**Recommended:**
+- **CPU**: 3 GHz quad-core
+- **RAM**: 8 GB
+- **Storage**: 20 GB NVMe SSD
+- **Network**: 50 Mbps
+
+**Production (100+ users):**
+- **CPU**: 16 cores @ 3.5 GHz
+- **RAM**: 32 GB
+- **Storage**: 200 GB NVMe SSD
+- **Network**: 500 Mbps
+
+### 🔧 Version-Specific Optimizations
+
+#### Moodle 3.11 LTS Optimizations
+```bash
+# PHP Configuration
+memory_limit = 256M
+max_execution_time = 300
+upload_max_filesize = 100M
+post_max_size = 100M
+
+# MySQL Configuration
+innodb_buffer_pool_size = 1G
+query_cache_size = 64M
+tmp_table_size = 64M
+max_heap_table_size = 64M
+```
+
+#### Moodle 4.0+ Optimizations
+```bash
+# PHP Configuration
+memory_limit = 512M
+max_execution_time = 600
+upload_max_filesize = 200M
+post_max_size = 200M
+opcache.memory_consumption = 256
+opcache.max_accelerated_files = 10000
+
+# MySQL Configuration
+innodb_buffer_pool_size = 2G
+query_cache_size = 128M
+tmp_table_size = 128M
+max_heap_table_size = 128M
+innodb_log_file_size = 256M
+```
+
+#### Moodle 5.0+ Optimizations
+```bash
+# PHP Configuration
+memory_limit = 1G
+max_execution_time = 900
+upload_max_filesize = 500M
+post_max_size = 500M
+opcache.memory_consumption = 512
+opcache.max_accelerated_files = 20000
+opcache.validate_timestamps = 0
+
+# MySQL Configuration
+innodb_buffer_pool_size = 4G
+query_cache_size = 256M
+tmp_table_size = 256M
+max_heap_table_size = 256M
+innodb_log_file_size = 512M
+innodb_flush_log_at_trx_commit = 2
 ```
 
 ### 🛡️ Security & Performance
