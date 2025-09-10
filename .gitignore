@@ -91,11 +91,6 @@ Thumbs.db
 tmp/
 temp/
 
-# Documentation (Protected - K2NET Internal)
-docs/
-*.md
-README.md
-
 # Configuration files (Protected)
 config.php
 *.conf
